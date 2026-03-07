@@ -30,6 +30,7 @@ import { initialState, me, owner, singleUserMode, trendsEnabled, landingPage, lo
 
 import BundleColumnError from './components/bundle_column_error';
 import { NavigationBar } from './components/navigation_bar';
+import { RetroTopBar } from './components/retro_top_bar';
 import { UploadArea } from './components/upload_area';
 import { HashtagMenuController } from './components/hashtag_menu_controller';
 import ColumnsAreaContainer from './containers/columns_area_container';
@@ -580,6 +581,7 @@ class UI extends PureComponent {
 
     return (
       <Hotkeys global handlers={handlers}>
+        <RetroTopBar />
         <div className={classNames('ui', { 'is-composing': isComposing })} ref={this.setRef}>
           <SwitchingColumnsArea identity={this.props.identity} location={location} singleColumn={layout === 'mobile' || layout === 'single-column'} forceOnboarding={firstLaunch && newAccount}>
             {children}

@@ -1,0 +1,804 @@
+// Retro Web 2.0 UI Styles — early Twitter / Web 2.0 aesthetic
+
+// ============================================================
+// Layout fixes — .ui and Hotkeys wrapper
+// ============================================================
+
+// The Hotkeys component renders a plain <div> wrapper.
+// Make it and .ui stretch properly in the column flex layout.
+.app-holder > div > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+.ui {
+  flex: 1 0 auto !important;
+  height: auto !important;
+}
+
+// ============================================================
+// Top Navigation Bar
+// ============================================================
+
+.retro-top-bar {
+  background: #8cc6e7;
+  border-bottom: 1px solid #6ba8d1;
+  padding: 8px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &__inner {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 20%);
+
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  &__link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:hover {
+      color: #fff;
+      background: #6ba8d1;
+      border-radius: 4px;
+      padding: 2px 4px;
+      margin: -2px -4px;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &--active {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ============================================================
+// Retro Container (800px centered)
+// ============================================================
+
+.layout-single-column {
+  .columns-area__panels {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin: 24px auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 36px !important;
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+
+  .columns-area__panels__main {
+    width: 810px !important;
+    min-width: 810px !important;
+    max-width: 810px !important;
+    order: 1;
+  }
+
+  .columns-area__panels__pane--compositional {
+    display: none !important;
+  }
+
+  .columns-area__panels__pane--navigational {
+    position: static !important;
+    width: 354px !important;
+    min-width: 354px !important;
+    max-width: 354px !important;
+    order: 2;
+    pointer-events: auto !important;
+    height: auto !important;
+    transition: none !important;
+    background: none !important;
+  }
+
+  .columns-area__panels__pane--navigational .columns-area__panels__pane__inner {
+    position: static !important;
+    width: 354px !important;
+    transform: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    pointer-events: auto !important;
+  }
+
+  // Hide mobile bottom nav bar
+  .ui__navigation-bar {
+    display: none !important;
+  }
+}
+
+// ============================================================
+// Content boxes
+// ============================================================
+
+.retro-content-box {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.retro-sidebar-box {
+  background: #f5f9fa;
+  border: 1px solid #d0e3e8;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+// ============================================================
+// Retro Buttons
+// ============================================================
+
+.retro-btn {
+  background: #e0e0e0;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #333;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+
+  &:hover {
+    background: #d0d0d0;
+  }
+}
+
+// ============================================================
+// Retro Compose Box
+// ============================================================
+
+.retro-compose {
+  padding: 12px;
+
+  &__intro {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 16px;
+  }
+
+  &__prompt {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  &__textarea {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    resize: vertical;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: 1px solid #8cc6e7;
+      border-color: #8cc6e7;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  &__counter {
+    font-size: 13px;
+    color: #999;
+  }
+}
+
+// ============================================================
+// Feed items — dashed border style
+// ============================================================
+
+.retro-feed-item {
+  border-bottom: 1px dashed #ccc;
+  padding: 12px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// ============================================================
+// Sidebar — Retro Navigation Panel
+// ============================================================
+
+.layout-single-column .navigation-panel {
+  margin: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  background: none !important;
+  border: none !important;
+  gap: 0;
+
+  // Hide default logo, search, profile card, compose button
+  &__logo {
+    display: none !important;
+  }
+
+  &__compose-button {
+    display: none !important;
+  }
+
+  &__banner {
+    display: none !important;
+  }
+
+  &__legal {
+    display: none !important;
+  }
+
+  &__sign-in-banner {
+    display: none !important;
+  }
+
+  // Hide the default navigation menu
+  &__menu {
+    display: none !important;
+  }
+
+  // Hide the search bar
+  .search {
+    display: none !important;
+  }
+
+  // Hide navigation-bar account card
+  .navigation-bar {
+    display: none !important;
+  }
+
+  // Hide hr separators
+  hr {
+    display: none !important;
+  }
+
+  .flex-spacer {
+    display: none !important;
+  }
+
+  // Style the trends section as retro sidebar
+  .getting-started__trends {
+    background: #f5f9fa;
+    border: 1px solid #d0e3e8;
+    border-radius: 8px;
+    padding: 0;
+    margin-bottom: 12px;
+
+    h4 {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      padding: 10px 12px;
+      border-bottom: 1px solid #d0e3e8;
+      margin: 0;
+    }
+
+    .trends__item {
+      padding: 6px 12px;
+      border-bottom: 1px solid #e8eff2;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+// ============================================================
+// Retro sidebar profile card
+// ============================================================
+
+.retro-profile-card {
+  background: #f5f9fa;
+  border: 1px solid #d0e3e8;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  text-align: center;
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    margin: 0 auto 8px;
+    display: block;
+  }
+
+  &__name {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+
+    a {
+      color: #333;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__handle {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 8px;
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+    border-top: 1px solid #d0e3e8;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+
+  &__stat {
+    text-align: center;
+    text-decoration: none;
+
+    &-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #06c !important;
+      display: block;
+    }
+
+    &-label {
+      font-size: 10px;
+      color: #999 !important;
+      text-transform: uppercase;
+    }
+  }
+}
+
+// ============================================================
+// Retro Footer
+// ============================================================
+
+.retro-footer {
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+  padding: 12px 0;
+
+  a {
+    color: #999;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__links {
+    margin-top: 4px;
+
+    a {
+      margin: 0 4px;
+    }
+  }
+}
+
+// ============================================================
+// Column / scrollable overrides for retro look
+// ============================================================
+
+.layout-single-column {
+  .column {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+
+  .tabs-bar__wrapper {
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background: #fff;
+  }
+
+  // When tabs-bar__wrapper is present, remove top border-radius from column
+  .tabs-bar__wrapper + .columns-area--mobile .column {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+  }
+
+  .column-header {
+    background: #fff !important;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+    box-shadow: none;
+
+    &__title {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .column-header__back-button {
+      color: #06c;
+    }
+
+    &__buttons {
+      button {
+        color: #666;
+      }
+    }
+  }
+
+  .column-back-button {
+    background: #fff;
+    color: #06c;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .scrollable {
+    background: #fff;
+    border-radius: 0;
+  }
+
+  // Restyle status items for retro feed look
+  .status {
+    border-bottom: 1px dashed #ccc !important;
+    padding: 10px 12px;
+
+    .status__info {
+      padding-bottom: 4px;
+
+      .status__display-name {
+        font-size: 13px;
+
+        .display-name {
+          strong {
+            color: #06c;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .status__relative-time {
+        font-size: 13px;
+        color: #999;
+        height: auto;
+        line-height: 16px;
+      }
+    }
+
+    .status__content {
+      font-size: 14px;
+      line-height: 16px;
+      color: #333;
+      padding-top: 0;
+
+      a {
+        color: #06c;
+      }
+    }
+
+    // Hide the action bar icons
+    .status__action-bar {
+      display: none !important;
+    }
+  }
+
+  // Show retro reply link instead
+  .retro-reply-link {
+    font-size: 14px;
+    color: #999;
+
+    a {
+      color: #06c;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Status metadata line
+  .retro-status-meta {
+    font-size: 14px;
+    color: #999;
+    margin-top: 4px;
+
+    a {
+      color: #06c;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// ============================================================
+// "More updates..." pagination link
+// ============================================================
+
+.retro-load-more {
+  text-align: center;
+  padding: 12px;
+  border-top: 1px solid #ccc;
+
+  a,
+  button {
+    color: #06c;
+    font-size: 14px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ============================================================
+// Profile Page — Retro Overrides
+// ============================================================
+
+.retro-profile-heading {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+}
+
+.layout-single-column {
+  // Simplify account header for retro look
+  .account__header__image {
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden;
+
+    img {
+      display: none;
+    }
+  }
+
+  .account__header {
+    background: #fff;
+  }
+
+  .account__header__bar {
+    background: #fff;
+    margin-top: 0;
+    padding: 12px;
+  }
+
+  .account__header__tabs {
+    margin-top: 0;
+    padding: 0;
+
+    .avatar {
+      width: 48px !important;
+      height: 48px !important;
+
+      .account__avatar {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 4px !important;
+      }
+    }
+  }
+
+  .account__header__tabs__name {
+    h1 {
+      font-size: 14px;
+
+      small {
+        font-size: 13px;
+        color: #999;
+      }
+    }
+  }
+
+  .account__header__extra {
+    margin-top: 8px;
+
+    .account__header__bio {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .account__header__fields {
+      border: 1px solid #d0e3e8;
+      border-radius: 4px;
+      margin-top: 8px;
+      background: #f5f9fa;
+
+      dt {
+        font-size: 13px;
+        color: #666;
+        background: transparent;
+      }
+
+      dd {
+        font-size: 13px;
+        color: #333;
+
+        a {
+          color: #06c;
+        }
+      }
+    }
+  }
+
+  // Profile tabs
+  .account__section-headline {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+
+    a,
+    button {
+      font-size: 14px;
+      color: #06c;
+      padding: 8px 12px;
+
+      &.active {
+        font-weight: bold;
+        color: #333;
+        border-bottom: 2px solid #06c;
+      }
+    }
+  }
+}
+
+// ============================================================
+// Featured Users grid (sidebar)
+// ============================================================
+
+.retro-featured-users {
+  background: #f5f9fa;
+  border: 1px solid #d0e3e8;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+
+  &__title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  &__user {
+    text-align: center;
+    text-decoration: none;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    &:hover img {
+      opacity: 0.9;
+    }
+  }
+}
+
+// ============================================================
+// Override global link styles for retro look
+// ============================================================
+
+.layout-single-column {
+  a {
+    color: #06c;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .button {
+    background: #e0e0e0;
+    border: 1px solid #999;
+    color: #333;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: none;
+    text-shadow: none;
+
+    &:hover {
+      background: #d0d0d0;
+    }
+  }
+
+  // Override the load-more button
+  .load-more {
+    color: #06c;
+    font-size: 14px;
+    border: none;
+    background: none;
+    padding: 12px;
+
+    &:hover {
+      text-decoration: underline;
+      background: none;
+    }
+  }
+
+  // Pinned post styling
+  .status__prepend {
+    font-size: 13px;
+    color: #d97529;
+    padding: 4px 12px 0;
+  }
+}
+
+// ============================================================
+// Announcement overrides
+// ============================================================
+
+.layout-single-column {
+  .announcements {
+    background: #fffdf0;
+    border-bottom: 1px solid #ccc;
+  }
+}

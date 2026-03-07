@@ -18,10 +18,12 @@ import { identityContextPropShape, withIdentity } from 'mastodon/identity_contex
 import { criticalUpdatesPending } from 'mastodon/initial_state';
 import { withBreakpoint } from 'mastodon/features/ui/hooks/useBreakpoint';
 
+import { mountCompose, unmountCompose } from '../../actions/compose';
 import { addColumn, removeColumn, moveColumn } from '../../actions/columns';
 import { expandHomeTimeline } from '../../actions/timelines';
 import Column from '../../components/column';
 import ColumnHeader from '../../components/column_header';
+import ComposeFormContainer from '../compose/containers/compose_form_container';
 import StatusListContainer from '../ui/containers/status_list_container';
 
 import { ColumnSettings } from './components/column_settings';
@@ -85,6 +87,7 @@ class HomeTimeline extends PureComponent {
   };
 
   componentDidMount () {
+    this.props.dispatch(mountCompose());
     setTimeout(() => this.props.dispatch(fetchAnnouncements()), 700);
     this._checkIfReloadNeeded(false, this.props.isPartial);
   }
@@ -94,6 +97,7 @@ class HomeTimeline extends PureComponent {
   }
 
   componentWillUnmount () {
+    this.props.dispatch(unmountCompose());
     this._stopPolling();
   }
 
@@ -142,6 +146,17 @@ class HomeTimeline extends PureComponent {
         >
           <IconWithBadge id='bullhorn' icon={CampaignIcon} count={unreadAnnouncements} />
         </button>
+      );
+    }
+
+    if (signedIn) {
+      banners.push(
+        <div key='retro-compose' className='retro-content-box' style={{ border: 'none', borderBottom: '1px solid #ccc', borderRadius: 0 }}>
+          <div className='retro-compose'>
+            <div className='retro-compose__prompt'>What are you doing?</div>
+            <ComposeFormContainer singleColumn />
+          </div>
+        </div>
       );
     }
 

@@ -3,40 +3,35 @@
 @use 'variables' as *;
 
 :root {
-  --dropdown-border-color: #{lighten($ui-base-color, 4%)};
-  --dropdown-background-color: #{rgba(darken($ui-base-color, 8%), 0.9)};
-  --dropdown-shadow:
-    0 20px 25px -5px #{color.change($base-shadow-color, $alpha: 0.25)},
-    0 8px 10px -6px #{color.change($base-shadow-color, $alpha: 0.25)};
-  --modal-background-color: #{rgba(darken($ui-base-color, 8%), 0.7)};
-  --modal-background-variant-color: #{color.change($ui-base-color, $alpha: 0.7)};
-  --modal-border-color: #{lighten($ui-base-color, 4%)};
-  --background-border-color: #{lighten($ui-base-color, 4%)};
-  --background-color: #{darken($ui-base-color, 8%)};
-  --background-color-tint: #{rgba(darken($ui-base-color, 8%), 0.9)};
-  --surface-background-color: #{darken($ui-base-color, 4%)};
-  --surface-variant-background-color: #{$ui-base-color};
-  --surface-variant-active-background-color: #{lighten($ui-base-color, 4%)};
-  --surface-border-color: #{lighten($ui-base-color, 8%)};
-  --on-surface-color: #{color.adjust($ui-base-color, $alpha: -0.5)};
-  --avatar-border-radius: 8px;
-  --media-outline-color: #{rgba(#fcf8ff, 0.15)};
-  --overlay-icon-shadow: drop-shadow(
-    0 0 8px #{color.change($base-shadow-color, $alpha: 0.35)}
-  );
+  --dropdown-border-color: #ccc;
+  --dropdown-background-color: rgba(255, 255, 255, 98%);
+  --dropdown-shadow: 0 2px 4px rgba(0, 0, 0, 10%), 0 1px 2px rgba(0, 0, 0, 8%);
+  --modal-background-color: rgba(0, 0, 0, 50%);
+  --modal-background-variant-color: rgba(255, 255, 255, 95%);
+  --modal-border-color: #ccc;
+  --background-border-color: #ccc;
+  --background-color: #e0f3f8;
+  --background-color-tint: rgba(224, 243, 248, 95%);
+  --surface-background-color: #fff;
+  --surface-variant-background-color: #f5f9fa;
+  --surface-variant-active-background-color: #eef3f5;
+  --surface-border-color: #d0e3e8;
+  --on-surface-color: rgba(255, 255, 255, 50%);
+  --avatar-border-radius: 4px;
+  --media-outline-color: rgba(0, 0, 0, 10%);
+  --overlay-icon-shadow: drop-shadow(0 0 4px rgba(0, 0, 0, 20%));
   --error-background-color: #{darken($error-red, 16%)};
   --error-active-background-color: #{darken($error-red, 12%)};
   --on-error-color: #fff;
-  --rich-text-container-color: rgba(87, 24, 60, 100%);
-  --rich-text-text-color: rgba(255, 175, 212, 100%);
-  --rich-text-decorations-color: rgba(128, 58, 95, 100%);
-  --nested-card-background: color(from #{$ui-highlight-color} srgb r g b / 5%);
-  --nested-card-text: #{$secondary-text-color};
-  --nested-card-border: 1px solid
-    color(from #{$ui-highlight-color} srgb r g b / 15%);
-  --input-placeholder-color: #{$dark-text-color};
-  --input-background-color: var(--surface-variant-background-color);
-  --on-input-color: #{$secondary-text-color};
+  --rich-text-container-color: #f5f9fa;
+  --rich-text-text-color: #333;
+  --rich-text-decorations-color: #ccc;
+  --nested-card-background: #f5f9fa;
+  --nested-card-text: #666;
+  --nested-card-border: 1px solid #d0e3e8;
+  --input-placeholder-color: #999;
+  --input-background-color: #fff;
+  --on-input-color: #333;
 }
 
 body {

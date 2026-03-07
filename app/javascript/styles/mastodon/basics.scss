@@ -16,10 +16,10 @@ html.has-modal {
 }
 
 body {
-  font-family: $font-sans-serif, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: var(--background-color);
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 20px;
   font-weight: 400;
   color: $primary-text-color;
   text-rendering: optimizelegibility;
@@ -34,30 +34,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 
   &.system-font {
-    // system-ui => standard property (Chrome/Android WebView 56+, Opera 43+, Safari 11+)
-    // -apple-system => Safari <11 specific
-    // BlinkMacSystemFont => Chrome <56 on macOS specific
-    // Segoe UI => Windows 7/8/10
-    // Oxygen => KDE
-    // Ubuntu => Unity/Ubuntu
-    // Cantarell => GNOME
-    // Fira Sans => Firefox OS
-    // Droid Sans => Older Androids (<4.0)
-    // Helvetica Neue => Older macOS <10.11
-    // $font-sans-serif => web-font (Roboto) fallback and newer Androids (>=4.0)
-    font-family:
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      'Fira Sans',
-      'Droid Sans',
-      'Helvetica Neue',
-      $font-sans-serif,
-      sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   &.app-body {
@@ -179,15 +156,18 @@ button {
   & > div,
   & > noscript {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: flex-start;
     outline: 0 !important;
   }
 
   & > noscript {
     min-height: 100vh;
     min-height: 100dvh;
+    align-items: center;
+    justify-content: center;
   }
 }
 
