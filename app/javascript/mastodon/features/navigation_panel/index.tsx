@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+import { Search } from 'mastodon/features/compose/components/search';
 import { autoPlayGif, me } from 'mastodon/initial_state';
 import { useAppSelector } from 'mastodon/store';
 
@@ -78,6 +79,7 @@ const RetroFooter: React.FC = () => (
 export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = () => {
   return (
     <div className='navigation-panel'>
+      <Search singleColumn />
       {me && <RetroProfileCard />}
       <Trends />
       <RetroFooter />

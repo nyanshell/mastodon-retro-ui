@@ -42,6 +42,13 @@ export const RetroTopBar: React.FC = () => {
           >
             Notifications
           </NavLink>
+          <NavLink
+            to='/lists'
+            className='retro-top-bar__link'
+            activeClassName='retro-top-bar__link--active'
+          >
+            Lists
+          </NavLink>
           <a href='/settings/preferences' className='retro-top-bar__link'>
             Settings
           </a>
@@ -66,6 +73,14 @@ export const RetroTopBar: React.FC = () => {
             </a>
           )}
         </nav>
+
+        <NavLink
+          to='/search'
+          className='retro-top-bar__link retro-top-bar__search'
+          activeClassName='retro-top-bar__link--active'
+        >
+          Search
+        </NavLink>
       </div>
     </div>
   );

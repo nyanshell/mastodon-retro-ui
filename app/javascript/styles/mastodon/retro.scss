@@ -84,6 +84,10 @@
       text-decoration: underline;
     }
   }
+
+  &__search {
+    margin-inline-start: auto;
+  }
 }
 
 // ============================================================
@@ -282,9 +286,16 @@
     display: none !important;
   }
 
-  // Hide the search bar
+  // Restyle the search bar for retro look
   .search {
-    display: none !important;
+    margin-bottom: 12px;
+
+    .search__input {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      font-size: 13px;
+    }
   }
 
   // Hide navigation-bar account card
@@ -444,13 +455,26 @@
     border: 1px solid #ccc;
     border-bottom: none;
     background: #fff;
+    padding-top: 0 !important;
+
+    .column-header,
+    .column-back-button {
+      border-bottom: none !important;
+    }
   }
 
-  // When tabs-bar__wrapper is present, remove top border-radius from column
-  .tabs-bar__wrapper + .columns-area--mobile .column {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top: none;
+  // When tabs-bar__wrapper is present, merge visually with the column below
+  .tabs-bar__wrapper + .columns-area--mobile {
+    .column {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top: none;
+    }
+
+    .scrollable:first-child,
+    .column > :first-child {
+      border-top: none;
+    }
   }
 
   .column-header {
@@ -524,9 +548,30 @@
       }
     }
 
-    // Hide the action bar icons
     .status__action-bar {
-      display: none !important;
+      margin-top: 4px;
+      gap: 12px;
+
+      button {
+        color: #999;
+        font-size: 13px;
+
+        &:hover {
+          color: #06c;
+        }
+      }
+
+      .icon-button {
+        color: #999;
+
+        &:hover {
+          color: #06c;
+        }
+
+        &.active {
+          color: #06c;
+        }
+      }
     }
   }
 
@@ -600,15 +645,9 @@
 }
 
 .layout-single-column {
-  // Simplify account header for retro look
   .account__header__image {
-    height: 0 !important;
-    min-height: 0 !important;
+    border-radius: 8px 8px 0 0;
     overflow: hidden;
-
-    img {
-      display: none;
-    }
   }
 
   .account__header {
