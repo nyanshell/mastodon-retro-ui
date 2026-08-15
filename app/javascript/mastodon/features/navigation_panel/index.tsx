@@ -531,7 +531,10 @@ export const CollapsibleNavigationPanel: React.FC = () => {
     }
   }, [open]);
 
-  const showOverlay = openable && open;
+  // In the retro single-column layout the navigation panel is always an
+  // openable drawer, not a permanent right rail, so the overlay shows at
+  // any width once opened.
+  const showOverlay = open;
 
   return (
     <div

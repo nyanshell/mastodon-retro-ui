@@ -1,0 +1,866 @@
+// "Twitter 2010" retro skin for the Mastodon web UI.
+// Implements the Claude Design mockup: sky-blue backdrop, glossy gradient
+// header and buttons, a rounded white shell with a main column and a
+// 272px sidebar, and text-link status actions. The palette is applied
+// globally by re-mapping the design tokens; the layout chrome applies to
+// the single-column ("retro") layout.
+
+@use 'variables' as *;
+@use 'theme/light';
+@use 'theme/utils' as theme-utils;
+
+/* ------------------------------------------------------------------ *
+ * 1. Palette: force the light scheme and re-map the token palette to
+ *    the 2010 sky-blue/steel-grey look.
+ * ------------------------------------------------------------------ */
+
+html,
+[data-color-scheme='light'],
+[data-color-scheme='dark'],
+html:not([data-color-scheme]) {
+  color-scheme: light;
+
+  @include light.tokens;
+  @include theme-utils.invert-on-light;
+
+  // Brand: 2010 Twitter link blue and glossy header blues.
+  --color-indigo-50: #eaf5fa;
+  --color-indigo-100: #d8eaf3;
+  --color-indigo-200: #b6d8e8;
+  --color-indigo-300: #7ec0e0;
+  --color-indigo-400: #4aa8d8;
+  --color-indigo-500: #2f9adf;
+  --color-indigo-600: #0084b4;
+  --color-indigo-700: #0084b4;
+  --color-indigo-800: #006e96;
+  --color-indigo-900: #1f628f;
+  --color-indigo-950: #143c5a;
+
+  // Greys: warm steel greys from the mockup.
+  --color-grey-50: #f5fafd;
+  --color-grey-100: #eaf5fa;
+  --color-grey-200: #d8eaf3;
+  --color-grey-300: #b6c7d1;
+  --color-grey-400: #99aab5;
+  --color-grey-500: #8fa8b5;
+  --color-grey-600: #678;
+  --color-grey-700: #578;
+  --color-grey-800: #456;
+  --color-grey-900: #37444e;
+  --color-grey-950: #333;
+
+  // Favourite gold and boost green accents.
+  --color-yellow-600: #e0a02b;
+  --color-yellow-700: #cf9022;
+  --color-green-600: #5c913b;
+  --color-green-700: #4f7d33;
+  --color-text-favourite-highlight: #e0a02b;
+}
+
+/* ------------------------------------------------------------------ *
+ * 2. Base typography and page background.
+ * ------------------------------------------------------------------ */
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body.app-body.layout-single-column {
+  background: #87bdd8 linear-gradient(#c3e0ef, #87bdd8 420px);
+  background-attachment: fixed;
+}
+
+.layout-single-column .ui {
+  background: transparent;
+}
+
+/* ------------------------------------------------------------------ *
+ * 3. Glossy header bar.
+ * ------------------------------------------------------------------ */
+
+.retro-header {
+  background: linear-gradient(#4aa8d8, #2a7bb5);
+  border-bottom: 1px solid #1f628f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 20%);
+  position: relative;
+  z-index: 2;
+
+  &__inner {
+    max-width: 905px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 12px;
+    height: 46px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &__wordmark {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -1px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 30%);
+  }
+
+  &__instance {
+    font-size: 10px;
+    color: #cfe6f5;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 20%);
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__search {
+    width: 190px;
+
+    .search {
+      margin-bottom: 0;
+    }
+
+    .search__input {
+      width: 100%;
+      border: 1px solid #1f628f;
+      border-radius: 12px;
+      padding: 4px 10px 4px 30px;
+      font-size: 12px;
+      background: #eaf5fb;
+      color: #333;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 15%);
+
+      &:focus {
+        background: #fff;
+      }
+    }
+
+    .search__icon-wrapper {
+      top: 50%;
+      transform: translateY(-50%);
+      margin-inline-start: 9px;
+      width: 15px;
+      height: 15px;
+      color: #678;
+    }
+
+    .search__popout {
+      font-size: 12px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  &__nav-link {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    color: #cfe6f5;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 20%);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    &.active {
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 30%);
+    }
+  }
+
+  &__badge {
+    background: #f2753e;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 1px 6px;
+    margin-inline-start: 4px;
+    text-shadow: none;
+    vertical-align: 1px;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 4. White rounded shell with main column + sidebar.
+ * ------------------------------------------------------------------ */
+
+.columns-area__panels.retro-layout {
+  display: block;
+  height: auto;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.retro-shell {
+  box-sizing: border-box;
+  max-width: 905px;
+  margin: 14px auto;
+  background: var(--color-bg-primary);
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(20, 60, 90, 35%);
+  padding: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+
+  .columns-area__panels__main {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+    background: transparent;
+  }
+
+  // The timeline body: bordered rounded box under the section header.
+  .columns-area--mobile {
+    box-sizing: border-box;
+
+    .column {
+      background: transparent;
+    }
+  }
+}
+
+.retro-sidebar {
+  flex: 0 0 auto;
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 13px;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__account {
+    background: #eaf5fa;
+    border: 1px solid #d8eaf3;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  &__account-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__avatar {
+    flex: none;
+
+    .account__avatar {
+      border-radius: 5px;
+    }
+  }
+
+  &__account-name {
+    min-width: 0;
+
+    a {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .display-name__account {
+      display: none;
+    }
+  }
+
+  &__handle {
+    font-size: 11px;
+    color: #7a97a8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__stats {
+    display: flex;
+    margin-top: 10px;
+    background: var(--color-bg-primary);
+    border: 1px solid #d8eaf3;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  &__stat {
+    flex: 1;
+    padding: 6px 2px;
+    border-inline-end: 1px solid #e8eef1;
+    text-decoration: none !important;
+
+    &:last-child {
+      border-inline-end: 0;
+    }
+
+    strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    span {
+      display: block;
+      font-size: 9px;
+      color: #99aab5;
+      text-transform: uppercase;
+    }
+  }
+
+  &__heading {
+    font-size: 12px;
+    margin: 0 0 6px;
+    color: #678;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+  }
+
+  &__trends {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__trend {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-brand);
+  }
+
+  &__trend-count {
+    font-weight: 400;
+    font-size: 11px;
+    color: #99aab5;
+  }
+
+  &__following {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  &__following-cell .account__avatar {
+    border-radius: 4px;
+  }
+
+  &__footer {
+    font-size: 11px;
+    color: #8fa8b5;
+    line-height: 1.7;
+    border-top: 1px solid #e8eef1;
+    padding-top: 8px;
+
+    a {
+      color: #8fa8b5;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 5. Column headers as 2010 section headers ("Home", etc.).
+ * ------------------------------------------------------------------ */
+
+.layout-single-column {
+  .tabs-bar__wrapper {
+    position: static;
+    background: transparent;
+    padding-top: 0;
+  }
+
+  .column-header__wrapper {
+    .column-header {
+      background: #eaf5fa;
+      border: 1px solid #d8eaf3;
+      border-bottom: none;
+      border-radius: 5px 5px 0 0;
+      color: var(--color-text-primary);
+      font-size: 16px;
+      font-weight: 700;
+
+      & > button {
+        padding: 6px 12px;
+      }
+
+      & > .column-header__back-button {
+        padding: 6px 12px;
+      }
+    }
+
+    .column-header__button {
+      background: transparent;
+    }
+  }
+
+  .column > .scrollable {
+    background: var(--color-bg-primary);
+    border: 1px solid #d8eaf3;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .column-back-button {
+    background: #eaf5fa;
+    border: 1px solid #d8eaf3;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    padding: 6px 12px;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 6. Statuses as 2010 "toots".
+ * ------------------------------------------------------------------ */
+
+.status {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e8eef1;
+
+  &:hover,
+  &:focus-within {
+    background: #f5fafd;
+  }
+
+  .status__avatar .account__avatar {
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 10%);
+  }
+
+  .status__content {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+}
+
+.status__prepend {
+  font-size: 11px;
+  color: #999;
+  padding-inline-start: 58px;
+  padding-bottom: 2px;
+
+  .status__prepend__icon {
+    color: #5c913b;
+  }
+}
+
+.status__display-name {
+  .display-name {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .display-name__html {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .display-name__account {
+    font-size: 11px;
+    color: #999;
+  }
+}
+
+.status__relative-time,
+.status__via {
+  font-size: 11px;
+  color: #999;
+}
+
+// Text-link action bar: right-aligned, coloured when active.
+.status__action-bar {
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 4px;
+
+  .status__action-bar__button-wrapper {
+    flex: 0 0 auto;
+  }
+
+  .icon-button {
+    width: auto !important;
+    height: auto !important;
+    padding: 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #99aab5;
+    background: transparent;
+
+    .icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    &:hover,
+    &:focus {
+      background: transparent;
+      color: #678;
+    }
+  }
+
+  .icon-button__label {
+    margin-inline-start: 2px;
+  }
+
+  .icon-button__counter {
+    width: auto;
+
+    &::before {
+      content: '(';
+    }
+
+    &::after {
+      content: ')';
+    }
+  }
+
+  // Boost: green when active.
+  .icon-button.active {
+    color: #5c913b;
+  }
+
+  // Favourite: gold when active.
+  .icon-button.star-icon.active {
+    color: #e0a02b;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 7. Compose box ("What's happening?").
+ * ------------------------------------------------------------------ */
+
+.retro-compose {
+  padding: 2px 0 12px;
+
+  &__heading {
+    font-size: 19px;
+    margin: 2px 0 8px;
+    color: var(--color-text-primary);
+    font-weight: 700;
+  }
+
+  .compose-form {
+    padding: 0;
+
+    // The account identity row is redundant here: the sidebar shows it.
+    .navigation-bar {
+      display: none;
+    }
+  }
+
+  .compose-form__highlightable {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .compose-form__input .autosuggest-textarea__textarea,
+  .autosuggest-textarea__textarea {
+    box-sizing: border-box;
+    min-height: 62px;
+    border: 1px solid #a8cfe2;
+    border-radius: 4px;
+    background: #f7fcfe;
+    font-size: 14px;
+    padding: 8px;
+    color: #333;
+
+    &:focus {
+      outline: none;
+      border-color: #7ec0e0;
+      box-shadow: 0 0 4px rgba(64, 153, 200, 50%);
+      background: #fff;
+    }
+  }
+}
+
+// Glossy blue submit button ("Toot!"), applied to all primary buttons.
+.button:not(.button-secondary, .button-tertiary) {
+  border: 1px solid #2384c9;
+  border-radius: 4px;
+  background: linear-gradient(#7fc3ef, #2f9adf);
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 25%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 50%);
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(#8fcbf2, #3ba4e5);
+  }
+
+  &:disabled,
+  &.disabled {
+    background: linear-gradient(#7fc3ef, #2f9adf);
+    opacity: 0.5;
+  }
+}
+
+.button.button-secondary {
+  border: 1px solid #b6c7d1;
+  border-radius: 4px;
+  background: linear-gradient(#fdfdfd, #dee9ef);
+  color: #578;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 80%);
+
+  &:hover,
+  &:focus {
+    background: linear-gradient(#fff, #e9f1f5);
+    border-color: #b6c7d1;
+    color: #578;
+  }
+}
+
+.compose-form .compose-form__submit .button {
+  font-size: 13px;
+  padding: 6px 18px;
+}
+
+// Character counter colours from the mockup.
+.character-counter {
+  font-size: 13px;
+  font-weight: 700;
+  color: #99aab5;
+
+  &.character-counter--over {
+    color: #d40d12;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 8. Content warnings.
+ * ------------------------------------------------------------------ */
+
+.content-warning {
+  background: #f2f6f8;
+  border: 1px solid #dbe6ec;
+  border-radius: 4px;
+  color: #678;
+
+  .link-button {
+    color: var(--color-text-brand);
+    font-weight: 700;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 9. Notifications.
+ * ------------------------------------------------------------------ */
+
+.notification-group {
+  border-bottom: 1px solid #e8eef1;
+
+  &:hover {
+    background: #f5fafd;
+  }
+
+  &__icon {
+    color: #0084b4;
+  }
+
+  &--favourite .notification-group__icon {
+    color: #e0a02b;
+  }
+
+  &--reblog .notification-group__icon {
+    color: #5c913b;
+  }
+
+  &--follow .notification-group__icon,
+  &--follow-request .notification-group__icon,
+  &--mention .notification-group__icon {
+    color: #0084b4;
+  }
+
+  &__embedded-status,
+  .notification-group__embedded-status__content {
+    color: #789;
+  }
+
+  &__embedded-status {
+    background: #f5f8fa;
+    border-inline-start: 3px solid #d8eaf3;
+    padding: 5px 8px;
+    border-radius: 0 4px 4px 0;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 10. Explore.
+ * ------------------------------------------------------------------ */
+
+.layout-single-column {
+  .explore__search-header {
+    background: transparent;
+    padding: 0 0 14px;
+
+    .search {
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .search__input {
+      border: 1px solid #a8cfe2;
+      border-radius: 4px;
+      padding: 7px 10px 7px 34px;
+      font-size: 13px;
+      background: #f7fcfe;
+      color: #333;
+    }
+  }
+
+  .account__section-headline {
+    background: #eaf5fa;
+    border: 1px solid #d8eaf3;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+
+    a,
+    button {
+      color: #678;
+
+      &.active {
+        color: var(--color-text-primary);
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.explore-suggestions-card {
+  border-bottom: 1px solid #e8eef1;
+
+  &:hover {
+    background: #f5fafd;
+  }
+
+  .account__avatar {
+    border-radius: 4px;
+  }
+}
+
+// Trend rows.
+.trends__item,
+.hashtag-bar {
+  border-bottom: 1px solid #e8eef1;
+}
+
+.trends__item__name a,
+.hashtag__name {
+  color: var(--color-text-brand);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ *
+ * 11. Navigation panel becomes an overlay drawer at every width.
+ * ------------------------------------------------------------------ */
+
+.retro-layout {
+  .columns-area__panels__pane--navigational {
+    position: fixed;
+    inset-inline-end: 0;
+    top: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    pointer-events: none;
+    visibility: hidden;
+
+    .columns-area__panels__pane__inner {
+      pointer-events: auto;
+      background: var(--color-bg-primary);
+      position: fixed;
+      top: 0;
+      width: 284px;
+      height: 100%;
+      inset-inline-end: 0;
+
+      .navigation-panel {
+        width: 284px;
+        height: 100%;
+        margin: 0;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        border-inline-start: 1px solid var(--color-border-primary);
+      }
+    }
+
+    &.columns-area__panels__pane--overlay {
+      visibility: visible;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 12. Responsive behaviour from the mockup.
+ * ------------------------------------------------------------------ */
+
+@media screen and (width <= 980px) {
+  .retro-sidebar {
+    display: none;
+  }
+
+  .retro-shell {
+    max-width: none;
+    margin: 10px;
+  }
+}
+
+@media screen and (width <= 640px) {
+  .retro-header__search,
+  .retro-header__instance {
+    display: none;
+  }
+
+  .retro-header__inner {
+    padding: 0 8px;
+    gap: 10px;
+  }
+
+  .retro-header__nav {
+    gap: 10px;
+  }
+
+  .retro-shell {
+    margin: 0;
+    border-radius: 0;
+    padding: 8px;
+  }
+}
