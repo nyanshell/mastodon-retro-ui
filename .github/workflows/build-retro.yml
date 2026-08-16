@@ -4,28 +4,22 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - twitter-retro-2010-4.6.6
+      - retro-ui
 
 permissions:
   contents: read
   packages: write
 
 # Reuses Mastodon's stock multi-arch build workflow to build the web and
-# streaming images and push them to the configured registries.
-#
-# Required repository secrets (Settings → Secrets and variables → Actions):
-#   DOCKERHUB_USERNAME — Docker Hub username
-#   DOCKERHUB_TOKEN    — Docker Hub access token with Read & Write scope
-#
-# To push to GHCR instead (no extra secrets needed), replace the
-# docker.io/... lines below with ghcr.io/nyanshell/... equivalents.
+# streaming images and push them to the GitHub Container registry.
+# Authentication uses the built-in GITHUB_TOKEN — no extra secrets needed.
 jobs:
   build-image:
     uses: ./.github/workflows/build-container-image.yml
     with:
       file_to_build: Dockerfile
       push_to_images: |
-        docker.io/nyanshell/mastodon-retro
+        ghcr.io/${{ github.repository_owner }}/mastodon-retro
       version_metadata: retro.2010
       flavor: |
         latest=true
@@ -39,7 +33,7 @@ jobs:
     with:
       file_to_build: streaming/Dockerfile
       push_to_images: |
-        docker.io/nyanshell/mastodon-retro-streaming
+        ghcr.io/${{ github.repository_owner }}/mastodon-retro-streaming
       version_metadata: retro.2010
       flavor: |
         latest=true
