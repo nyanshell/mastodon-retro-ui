@@ -398,6 +398,11 @@ body.app-body.layout-single-column {
   .tabs-bar__wrapper {
     position: static;
     background: transparent;
+
+    // Stock rule darkens the backdrop (brightness/contrast) for sticky
+    // headers; on the transparent wrapper it shows up as dark specks in
+    // the notches outside the column header's rounded corners.
+    backdrop-filter: none;
     padding-top: 0;
   }
 
