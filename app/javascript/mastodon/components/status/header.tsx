@@ -49,6 +49,9 @@ export const StatusHeader: FC<StatusHeaderProps> = ({
   }
   const statusAccount = status.account;
   const editedAt = status.edited_at;
+  // StatusShape declares `application` as required, but the API omits it for
+  // remote statuses (see ApiStatusJSON where it is optional).
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   const applicationName = status.application?.name;
 
   return (

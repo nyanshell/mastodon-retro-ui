@@ -6,8 +6,8 @@
 // the single-column ("retro") layout.
 
 @use 'variables' as *;
-@use 'theme/light';
-@use 'theme/utils' as theme-utils;
+@use 'tokens/theme/light';
+@use 'tokens/theme/utils' as theme-utils;
 
 /* ------------------------------------------------------------------ *
  * 1. Palette: force the light scheme and re-map the token palette to
