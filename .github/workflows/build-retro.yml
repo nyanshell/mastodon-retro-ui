@@ -24,7 +24,7 @@ jobs:
       flavor: |
         latest=true
       tags: |
-        type=raw,value=4.7.0-retro
+        type=raw,value=4.7.1-retro
         type=sha
     secrets: inherit
 
@@ -38,6 +38,6 @@ jobs:
       flavor: |
         latest=true
       tags: |
-        type=raw,value=4.7.0-retro
+        type=raw,value=4.7.1-retro
         type=sha
     secrets: inherit
