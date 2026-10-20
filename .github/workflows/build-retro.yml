@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - retro-ui
+      - retro-ui-4.7.3
 
 permissions:
   contents: read
@@ -24,7 +24,7 @@ jobs:
       flavor: |
         latest=true
       tags: |
-        type=raw,value=4.7.1-retro
+        type=raw,value=4.7.3-retro
         type=sha
     secrets: inherit
 
@@ -38,6 +38,6 @@ jobs:
       flavor: |
         latest=true
       tags: |
-        type=raw,value=4.7.1-retro
+        type=raw,value=4.7.3-retro
         type=sha
     secrets: inherit
