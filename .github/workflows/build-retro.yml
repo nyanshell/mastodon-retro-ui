@@ -1,0 +1,43 @@
+name: Build retro container images
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - retro-ui
+
+permissions:
+  contents: read
+  packages: write
+
+# Reuses Mastodon's stock multi-arch build workflow to build the web and
+# streaming images and push them to the GitHub Container registry.
+# Authentication uses the built-in GITHUB_TOKEN — no extra secrets needed.
+jobs:
+  build-image:
+    uses: ./.github/workflows/build-container-image.yml
+    with:
+      file_to_build: Dockerfile
+      push_to_images: |
+        ghcr.io/${{ github.repository_owner }}/mastodon-retro
+      version_metadata: retro.2010
+      flavor: |
+        latest=true
+      tags: |
+        type=raw,value=4.7.1-retro
+        type=sha
+    secrets: inherit
+
+  build-image-streaming:
+    uses: ./.github/workflows/build-container-image.yml
+    with:
+      file_to_build: streaming/Dockerfile
+      push_to_images: |
+        ghcr.io/${{ github.repository_owner }}/mastodon-retro-streaming
+      version_metadata: retro.2010
+      flavor: |
+        latest=true
+      tags: |
+        type=raw,value=4.7.1-retro
+        type=sha
+    secrets: inherit
