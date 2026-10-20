@@ -26,6 +26,7 @@ import { boostItemState, messages, quoteItemState } from './boost_button_utils';
 const StandaloneBoostButton: FC<ReblogButtonProps> = ({
   statusId,
   counters,
+  withLabel,
 }) => {
   const intl = useIntl();
   const dispatch = useAppDispatch();
@@ -64,6 +65,7 @@ const StandaloneBoostButton: FC<ReblogButtonProps> = ({
       disabled={disabled}
       active={!!status?.reblogged}
       title={intl.formatMessage(meta ?? title)}
+      label={withLabel ? intl.formatMessage(messages.reblog) : undefined}
       icon='retweet'
       iconComponent={iconComponent}
       className='status__action-bar__button'
@@ -89,11 +91,16 @@ const renderMenuItem: RenderItemFn<ActionMenuItem> = (item, index, onClick) => (
 interface ReblogButtonProps {
   statusId: string;
   counters?: boolean;
+  withLabel?: boolean;
 }
 
 type ActionMenuItemWithIcon = SetRequired<ActionMenuItem, 'icon'>;
 
-const BoostOrQuoteMenu: FC<ReblogButtonProps> = ({ statusId, counters }) => {
+const BoostOrQuoteMenu: FC<ReblogButtonProps> = ({
+  statusId,
+  counters,
+  withLabel,
+}) => {
   const intl = useIntl();
   const dispatch = useAppDispatch();
   const status = useStatus(statusId);
@@ -197,6 +204,7 @@ const BoostOrQuoteMenu: FC<ReblogButtonProps> = ({ statusId, counters }) => {
         title={intl.formatMessage(
           isMenuDisabled ? messages.all_disabled : messages.reblog_or_quote,
         )}
+        label={withLabel ? intl.formatMessage(messages.reblog) : undefined}
         icon='retweet'
         className='status__action-bar__button'
         iconComponent={boostIcon}

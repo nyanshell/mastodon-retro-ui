@@ -9,6 +9,7 @@ import {
 } from 'react';
 
 import classNames from 'classnames';
+import { useLocation } from 'react-router-dom';
 
 import type { List, Record } from 'immutable';
 
@@ -17,7 +18,6 @@ import { Footer } from 'mastodon/features/custom_homepage/components/footer';
 import { Header } from 'mastodon/features/custom_homepage/components/header';
 import { CollapsibleNavigationPanel } from 'mastodon/features/navigation_panel';
 
-import { useBreakpoint } from '../hooks/useBreakpoint';
 import {
   Compose,
   Notifications,
@@ -36,8 +36,11 @@ import { useColumnsContext } from '../util/columns_context';
 import Bundle from './bundle';
 import { BundleColumnError } from './bundle_column_error';
 import { ColumnLoading } from './column_loading';
-import { ComposePanel, RedirectToMobileComposeIfNeeded } from './compose_panel';
+import { RedirectToMobileComposeIfNeeded } from './compose_panel';
 import DrawerLoading from './drawer_loading';
+import { RetroComposeBox } from './retro/compose_box';
+import { RetroHeader } from './retro/header';
+import { RetroSidebar } from './retro/sidebar';
 
 const componentMap = {
   COMPOSE: Compose,
@@ -92,7 +95,7 @@ export const ColumnsArea = forwardRef<
     children: React.ReactElement | React.ReactElement[];
   }
 >(({ children, minimalShell, singleColumn }, ref) => {
-  const renderComposePanel = !useBreakpoint('full');
+  const { pathname } = useLocation();
   const columns = useAppSelector(
     (state) => state.settings.get('columns') as List<Record<Column>>,
   );
@@ -120,22 +123,24 @@ export const ColumnsArea = forwardRef<
 
   if (singleColumn) {
     return (
-      <div className='columns-area__panels'>
-        <div className='columns-area__panels__pane columns-area__panels__pane--compositional'>
-          <div className='columns-area__panels__pane__inner'>
-            {renderComposePanel && <ComposePanel />}
-            <RedirectToMobileComposeIfNeeded />
-          </div>
+      <div className='columns-area__panels retro-layout'>
+        <RetroHeader />
+
+        <div className='retro-shell'>
+          <main className='columns-area__panels__main retro-shell__main'>
+            {pathname === '/home' && <RetroComposeBox />}
+
+            <div className='tabs-bar__wrapper'>
+              <TabsBarPortal />
+            </div>
+
+            <div className='columns-area columns-area--mobile'>{children}</div>
+          </main>
+
+          <RetroSidebar />
         </div>
 
-        <main className='columns-area__panels__main'>
-          <div className='tabs-bar__wrapper'>
-            <TabsBarPortal />
-          </div>
-
-          <div className='columns-area columns-area--mobile'>{children}</div>
-        </main>
-
+        <RedirectToMobileComposeIfNeeded />
         <CollapsibleNavigationPanel />
       </div>
     );

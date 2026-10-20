@@ -26,6 +26,7 @@ interface Props {
   overlay?: boolean;
   tabIndex?: number;
   counter?: number;
+  label?: React.ReactNode;
   href?: string;
   ariaHidden?: boolean;
   ariaControls?: string;
@@ -41,6 +42,7 @@ export const IconButton = forwardRef<HTMLButtonElement, Props>(
       inverted,
       title,
       counter,
+      label,
       href,
       style,
       activeStyle,
@@ -104,11 +106,13 @@ export const IconButton = forwardRef<HTMLButtonElement, Props>(
       deactivate: shouldAnimate && !active,
       overlayed: overlay,
       'icon-button--with-counter': typeof counter !== 'undefined',
+      'icon-button--with-label': label != null,
     });
 
     let contents = (
       <>
         <Icon id={icon} icon={iconComponent} aria-hidden='true' />{' '}
+        {label != null && <span className='icon-button__label'>{label}</span>}
         {typeof counter !== 'undefined' && (
           <span className='icon-button__counter'>
             <AnimatedNumber value={counter} />

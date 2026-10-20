@@ -1,6 +1,6 @@
 import type { FC, HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 
-import { defineMessage, useIntl } from 'react-intl';
+import { defineMessage, FormattedMessage, useIntl } from 'react-intl';
 
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
@@ -49,6 +49,10 @@ export const StatusHeader: FC<StatusHeaderProps> = ({
   }
   const statusAccount = status.account;
   const editedAt = status.edited_at;
+  // StatusShape declares `application` as required, but the API omits it for
+  // remote statuses (see ApiStatusJSON where it is optional).
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  const applicationName = status.application?.name;
 
   return (
     /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
@@ -76,6 +80,16 @@ export const StatusHeader: FC<StatusHeaderProps> = ({
         </span>
         <RelativeTimestamp timestamp={status.created_at} />
         {editedAt && <StatusEditedAt editedAt={editedAt} />}
+        {applicationName && (
+          <span className='status__via'>
+            {' '}
+            <FormattedMessage
+              id='retro.status.via'
+              defaultMessage='via {name}'
+              values={{ name: applicationName }}
+            />
+          </span>
+        )}
       </Link>
 
       {contentAfterDate}
